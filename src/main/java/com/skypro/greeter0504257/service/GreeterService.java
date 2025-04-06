@@ -5,15 +5,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GreeterService {
+    private RandomHelloService randomHelloService;
+
+//    public GreeterService() {
+//        this.randomHelloService = new RandomHelloService();
+//    }
+
+    public GreeterService(RandomHelloService randomHelloService) {
+        this.randomHelloService = randomHelloService;
+    }
+
     public String greeter(String name) {
         if (name == null || name.isBlank()) {
-            System.out.println("Hello, Anonymous");
-            return "Hello, Anonymous";
+            String hello = randomHelloService.randomHello();
+            System.out.println(hello + "Anonymous");
+            return (hello + "Anonymous");
 
-        } else{
-            System.out.println("Hello," + name);
+        } else {
+            String hello = randomHelloService.randomHello();
+            System.out.println(hello + name);
+            return hello + name;
         }
-        return "Hello, " + name;
     }
 
 }
